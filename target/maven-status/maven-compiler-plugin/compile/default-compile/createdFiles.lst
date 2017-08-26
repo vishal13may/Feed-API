@@ -1,0 +1,8 @@
+feed\beans\User.class
+feed\util\ConnectionManager.class
+feed\beans\Feed.class
+feed\beans\Article.class
+feed\controller\ArticleController.class
+feed\controller\SubscriberController.class
+feed\beans\Subscription.class
+feed\controller\FeedController.class
