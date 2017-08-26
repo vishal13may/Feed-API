@@ -19,6 +19,7 @@ public class SubscriberController {
 	
 	private SubscriberService subscriberService = new SubscriberService();
 
+	@SuppressWarnings("unchecked")
 	@POST
 	@Path("/subscribe/")
 	@Consumes("application/json")
@@ -36,6 +37,7 @@ public class SubscriberController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PUT
 	@Path("/unsubscribe/")
 	@Consumes("application/json")

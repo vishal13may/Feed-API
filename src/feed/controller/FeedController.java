@@ -22,15 +22,7 @@ public class FeedController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Feed> getFeeds() {
-		Feed feed = new Feed();
-		feed.setId(1);
-		feed.setName("Technology");
 		List<Feed> feeds = new ArrayList<Feed>();
-		feeds.add(feed);
-		Feed feed1 = new Feed();
-		feed1.setId(2);
-		feed1.setName("Technology");
-		feeds.add(feed1);
 		return feeds;
 	}
 
@@ -41,6 +33,7 @@ public class FeedController {
 		return new Feed();
 	}
 
+	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/user/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)

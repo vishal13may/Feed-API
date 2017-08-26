@@ -25,12 +25,10 @@ public class FeedDao {
 			stmt.setInt(1, userId);
 			ResultSet rows = stmt.executeQuery();
 
-			Feed feed = new Feed();
 			while (rows.next()) {
-				String name = rows.getString("feed_name");
-				int id = rows.getInt("feed_id");
-				feed.setId(id);
-				feed.setName(name);
+				Feed feed = new Feed();
+				feed.setId(rows.getInt("feed_id"));
+				feed.setName(rows.getString("feed_name"));
 				feeds.add(feed);
 			}
 			return feeds;
