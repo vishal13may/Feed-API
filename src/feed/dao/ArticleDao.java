@@ -18,7 +18,7 @@ import feed.util.ConnectionManager;
 public class ArticleDao {
 
 	public Map<String, List<Article>> getArticlesByUser(int userId) {
-		Connection connection;
+		Connection connection = null;
 		Map<String, List<Article>> map = new HashMap<String, List<Article>>();
 		try {
 			connection = ConnectionManager.getConnection();
@@ -44,21 +44,30 @@ public class ArticleDao {
 				if (map.containsKey(feedName)) {
 					List<Article> articles = map.get(feedName);
 					articles.add(article);
-					map.put(feedName,articles);
-				}else{
+					map.put(feedName, articles);
+				} else {
 					List<Article> articles = new ArrayList<Article>();
 					articles.add(article);
-					map.put(feedName,articles);
+					map.put(feedName, articles);
 				}
 			}
 			return map;
 		} catch (SQLException e) {
 			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
 	public boolean createArticle(Article article) {
-		Connection connection;
+		Connection connection = null;
 		try {
 			connection = ConnectionManager.getConnection();
 			if (connection == null) {
@@ -84,7 +93,7 @@ public class ArticleDao {
 					+ "VALUES (?, ?)";
 			PreparedStatement stmt2 = connection
 					.prepareStatement(insertFeedArticle);
-			stmt2.setInt(1, article.getFeedId());
+			stmt2.setInt(1, article.retrieveFeedId());
 			stmt2.setInt(2, article.getId());
 			rows = stmt2.executeUpdate();
 			if (rows == 0) {
@@ -94,6 +103,15 @@ public class ArticleDao {
 			return true;
 		} catch (SQLException e) {
 			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

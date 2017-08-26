@@ -8,6 +8,14 @@ create table article (id int AUTO_INCREMENT, title varchar(255), content text, a
 
 create table feed_article (feedId int, articleId int);
 
+ALTER TABLE feed_api.feed_article ADD CONSTRAINT fk_article_id FOREIGN KEY (articleId) REFERENCES feed_api.article(id);
+
+ALTER TABLE feed_api.feed_article ADD CONSTRAINT fk_feed_id FOREIGN KEY (feedId) REFERENCES feed_api.feed(id);
+
+ALTER TABLE feed_api.subscription ADD CONSTRAINT fk_subscription_feed_id FOREIGN KEY (feedId) REFERENCES feed_api.feed(id);
+
+ALTER TABLE feed_api.subscription ADD CONSTRAINT fk_subscription_user_id FOREIGN KEY (userId) REFERENCES feed_api.user(id);
+
 
 insert into user (name, emailId) values('Vishal', 'vishalos@usc.edu');
 insert into user (name, emailId) values('Albert', 'albert@usc.edu');

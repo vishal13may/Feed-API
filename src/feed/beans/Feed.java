@@ -3,6 +3,8 @@ package feed.beans;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 
 public class Feed implements Serializable {
@@ -35,7 +37,7 @@ public class Feed implements Serializable {
 		this.name = name;
 	}
 
-	public Set<Article> getArticles() {
+	public Set<Article> retrieveArticles() {
 		return articles;
 	}
 

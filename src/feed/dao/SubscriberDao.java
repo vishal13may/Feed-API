@@ -10,7 +10,7 @@ import feed.util.ConnectionManager;
 
 public class SubscriberDao {
 	public boolean subscribe(Subscription subscription) {
-		Connection connection;
+		Connection connection = null;
 		try {
 			connection = ConnectionManager.getConnection();
 			if (connection == null) {
@@ -35,11 +35,20 @@ public class SubscriberDao {
 			return true;
 		} catch (SQLException e) {
 			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
 	public boolean unsubscribe(Subscription subscription) {
-		Connection connection;
+		Connection connection = null;
 		try {
 			connection = ConnectionManager.getConnection();
 			if (connection == null) {
@@ -48,7 +57,8 @@ public class SubscriberDao {
 			String sql = "update subscription set isActive = ?, endDate = ? where userId = ? and feedId = ?";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setBoolean(1, subscription.isActive());
-			stmt.setTimestamp(2, new java.sql.Timestamp(subscription.getEndDate().getTime()));
+			stmt.setTimestamp(2, new java.sql.Timestamp(subscription
+					.getEndDate().getTime()));
 			stmt.setInt(3, subscription.getUserId());
 			stmt.setInt(4, subscription.getFeedId());
 			int rows = stmt.executeUpdate();
@@ -58,6 +68,15 @@ public class SubscriberDao {
 			return true;
 		} catch (SQLException e) {
 			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }

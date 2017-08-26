@@ -2,6 +2,8 @@ package feed.beans;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class Article implements Serializable {
 	/**
 	 * 
@@ -49,7 +51,7 @@ public class Article implements Serializable {
 		this.author = author;
 	}
 
-	public int getFeedId() {
+	public int retrieveFeedId() {
 		return feedId;
 	}
 

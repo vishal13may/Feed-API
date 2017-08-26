@@ -1,8 +1,14 @@
 feed\beans\User.class
-feed\util\ConnectionManager.class
-feed\beans\Feed.class
 feed\beans\Article.class
 feed\controller\ArticleController.class
-feed\controller\SubscriberController.class
+feed\dao\FeedDao.class
 feed\beans\Subscription.class
+feed\util\ConnectionManager.class
+feed\beans\Feed.class
+feed\service\FeedService.class
+feed\controller\SubscriberController.class
+feed\service\SubscriberService.class
+feed\service\ArticleService.class
 feed\controller\FeedController.class
+feed\dao\SubscriberDao.class
+feed\dao\ArticleDao.class

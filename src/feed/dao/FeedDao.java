@@ -12,7 +12,7 @@ import feed.util.ConnectionManager;
 
 public class FeedDao {
 	public List<Feed> getUserFeeds(int userId) {
-		Connection connection;
+		Connection connection = null;
 		List<Feed> feeds = new ArrayList<Feed>();
 		try {
 			connection = ConnectionManager.getConnection();
@@ -34,6 +34,15 @@ public class FeedDao {
 			return feeds;
 		} catch (SQLException e) {
 			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }

@@ -1,9 +1,5 @@
 package feed.controller;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +15,7 @@ import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 
 import feed.beans.Article;
-import feed.beans.Subscription;
 import feed.service.ArticleService;
-import feed.util.ConnectionManager;
 
 @Path("/articles/")
 public class ArticleController {
@@ -47,21 +41,21 @@ public class ArticleController {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/user/{userId}")
-	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getArticlesByUser(@PathParam("userId") int userId) {
 		JSONObject response = new JSONObject();
-		Map<String,List<Article>> map = articleService.getArticlesByUser(userId);
-		if(map == null){
+		Map<String, List<Article>> map = articleService
+				.getArticlesByUser(userId);
+		if (map == null) {
 			response.put("status", false);
 			response.put("error", "Something went wrong.");
 			return Response.status(500).entity(response).build();
 		}
 		response.put("status", true);
 		response.put("articles", map);
-		if(map.size() == 0){
+		if (map.size() == 0) {
 			return Response.status(204).entity(response).build();
-		}else{
+		} else {
 			return Response.status(200).entity(response).build();
 		}
 	}
