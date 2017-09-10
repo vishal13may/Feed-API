@@ -8,7 +8,7 @@ public class ConnectionManager {
 
 	public static final String databaseName = "feed_api";
 	public static final String userName = "root";
-	public static final String password = "Xyz123";
+	public static final String password = "";
 
 	public static Connection getConnection() throws SQLException {
 		try {
